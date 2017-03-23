@@ -84,7 +84,7 @@ traverse = function(object, address, defaultList)
           function(container)
           { if (! container) container = { div: function() { return $("body"); } };
 
-            this.div().appendTo(container.div());
+            this.div().data("at", this).appendTo(container.div());
             this.listen();
           }
       this.a.prototype.listen =
@@ -109,7 +109,7 @@ traverse = function(object, address, defaultList)
                 [ "toReturn = new HoloHacker.a(); \
                    toReturn.parent = current;     \
                    var ToReturn = toReturn;       \
-                   setImmediate(function(){ToReturn.express(current);});  \
+                   setImmediate(function(){ToReturn.express(ToReturn.parent);});  \
                   "
                 ]
             ));
@@ -143,6 +143,14 @@ traverse = function(object, address, defaultList)
               
               console.log("test2: ", traverse(a, "DOMEvent.click", ["toReturn = false;"], false ));
             }
+        //Trying to make an unruly load of boxes appear on the screen in response to mousemovment
+        this.test3 =
+            function()
+            { a.div().trigger("click");
+              
+              console.log("test2: ", traverse(a, "DOMEvent.click", ["toReturn = false;"], false ));
+            }
+
 
         //Trying tocreat a run time object i can control with my computer.
         // including downloading webpages, categorisighin things and writing code
@@ -151,7 +159,7 @@ traverse = function(object, address, defaultList)
         // Describe things as if "I" am doing it
 
         //thekeyboard is the only line in the language that you cannot change
-        
+
         console.log("tests have to be run one after the other");
       }
 
