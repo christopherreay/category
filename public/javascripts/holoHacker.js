@@ -79,10 +79,11 @@ traverse = function(object, address, defaultList)
             return this.context.div;
           }
       this.a.prototype.express = 
-          function(container=$("body"))
+          function(container)
           { if (! container) container = { div: function() { return $("body"); } };
 
-            this.div().appendTo(container);
+            this.div().appendTo(container.div());
+            this.listen();
           }
       this.a.prototype.listen =
           function() 
@@ -93,23 +94,27 @@ traverse = function(object, address, defaultList)
                   "dblclick mousedown mouseup mousemove mouseover mouseout mouseenter " +
                   "mouseleave change select submit keydown keypress keyup error", 
                   function(event) 
-                  { This.contextArrives(event)
+                  { This.eventArrives(event)
                   }
                 ) 
           }
-      this.a.prototype.contextArrives = 
+      this.a.prototype.eventArrives = 
           function(event)
           { console.log
             ( traverse
               ( this, 
-                "context.DOMEvent"+"."+event.type, 
+                "DOMEvent"+"."+event.type, 
                 [ "toReturn = new HoloHacker.a(); \
                    toReturn.parent = current;     \
+                   var ToReturn = toReturn;       \
+                   setImmediate(function(){ToReturn.express(current);});  \
                   "
                 ]
             ));
             
           }
+
+
 
       // this.init = function(rootElement)
       // { holoHacker.display                = $(rootElement);
