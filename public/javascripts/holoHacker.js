@@ -31,6 +31,7 @@ traverse = function(object, address, defaultList)
       { if (!current.hasOwnProperty(wayPoint) )
         { var toReturn;
           eval(defaultList[defaultCounter]);
+          toReturn.name = wayPoint;
           current[wayPoint] =  toReturn;
           console.log("current:", current, "key:", wayPoint, "obj:", current[wayPoint]);
         }
@@ -109,6 +110,8 @@ traverse = function(object, address, defaultList)
                 "DOMEvent"+"."+event.type, 
                 [ ["toReturn = new HoloHacker.a();",
                    "toReturn.parent = current;",
+                   "toReturn.name = wayPoint;",
+                   "toReturn.div().toggleClass(wayPoint, true);",
                    // "var ToReturn = toReturn;",
                    "toReturn.express(toReturn.parent);",
                    "",
@@ -149,11 +152,13 @@ traverse = function(object, address, defaultList)
         //Trying to make an unruly load of boxes appear on the screen in response to mousemovment
         this.test3 =
             function()
-            { a.div().trigger("click");
-              
-              console.log("test2: ", traverse(a, "DOMEvent.click", ["toReturn = false;"], false ));
+            {        
+              console.log("wave the mouse around and get crazy boxes");
             }
-
+        //Divs with Class. Check if divs have classes
+        this.test4 = function()
+            { ROOT.div();
+            }
 
         //Trying tocreat a run time object i can control with my computer.
         // including downloading webpages, categorisighin things and writing code
