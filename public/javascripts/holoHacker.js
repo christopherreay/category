@@ -42,6 +42,7 @@ traverse = function(object, address, defaultList)
 
       return current;
     }
+
     prettyPrint = function(field, value)
     { var currentValue;
       if (field.data.hasOwnProperty("fieldPrecisionFunction") )
@@ -69,11 +70,12 @@ traverse = function(object, address, defaultList)
 
       this.a = function()
       { this.context = {};
+        this.id = uuid();
       }
       this.a.prototype.div = 
           function()
           { if (! this.context.div) 
-            { this.context.div = $("<div />");
+            { this.context.div = $("<div />").attr("id", this.id);
 
             }
             return this.context.div;
@@ -101,7 +103,7 @@ traverse = function(object, address, defaultList)
       this.a.prototype.eventArrives = 
           function(event)
           { console.log
-            ( traverse
+            ( "Event: ", traverse
               ( this, 
                 "DOMEvent"+"."+event.type, 
                 [ "toReturn = new HoloHacker.a(); \
@@ -113,6 +115,36 @@ traverse = function(object, address, defaultList)
             ));
             
           }
+
+
+      this.test = function()
+      { this.run =
+            function()
+            { for (var i=0; ! hasOwnProperty(this, 'test'+i); i++)
+              { this['test'+i]();
+              }
+            }
+        //tests have to be run one after the other
+        //create a new a and add its DOM node to <body>
+        this.test1 = 
+            function()
+            { a = new HoloHacker.a();
+              a.express();
+
+              if ($("#"+a.id))
+                console.log("passed");
+              else
+                console.log("failed");
+            }
+        //check if a click event causes a new a to be added to the correct location in the address space.
+        this.test2 =
+            function()
+            { a.div().trigger("click");
+              
+              console.log("test2: ", traverse(a, "DOMEvent.click", ["toReturn = false;"] ));
+            }
+        console.log("tests have to be run one after the other");
+      }
 
 
 
