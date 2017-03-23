@@ -146,6 +146,11 @@ traverse = function(object, address, defaultList)
 
         //Trying tocreat a run time object i can control with my computer.
         // including downloading webpages, categorisighin things and writing code
+
+
+        // Describe things as if "I" am doing it
+
+        
         console.log("tests have to be run one after the other");
       }
 
