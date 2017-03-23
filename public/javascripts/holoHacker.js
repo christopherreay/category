@@ -30,7 +30,7 @@ traverse = function(object, address, defaultList)
       for (var wayPoint of address)
       { if (!current.hasOwnProperty(wayPoint) )
         { var toReturn;
-          exec(defaultList[defaultCounter]);
+          eval(defaultList[defaultCounter]);
           current[wayPoint] =  toReturn
         }
         current = current[wayPoint];
@@ -105,7 +105,6 @@ traverse = function(object, address, defaultList)
                 "context.DOMEvent"+"."+event.type, 
                 [ "toReturn = new HoloHacker.a(); \
                    toReturn.parent = current;     \
-                   setImmediate(function(){toReturn.express(current)})  \
                   "
                 ]
             ));
