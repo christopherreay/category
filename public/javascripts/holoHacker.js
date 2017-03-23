@@ -141,8 +141,11 @@ traverse = function(object, address, defaultList)
             function()
             { a.div().trigger("click");
               
-              console.log("test2: ", traverse(a, "DOMEvent.click", ["toReturn = false;"] ));
+              console.log("test2: ", traverse(a, "DOMEvent.click", ["toReturn = false;"], false ));
             }
+
+        //Trying tocreat a run time object i can control with my computer.
+        // including downloading webpages, categorisighin things and writing code
         console.log("tests have to be run one after the other");
       }
 
