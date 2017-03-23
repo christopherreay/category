@@ -31,7 +31,8 @@ traverse = function(object, address, defaultList)
       { if (!current.hasOwnProperty(wayPoint) )
         { var toReturn;
           eval(defaultList[defaultCounter]);
-          current[wayPoint] =  toReturn
+          current[wayPoint] =  toReturn;
+          console.log("current:", current, "key:", wayPoint, "obj:", current[wayPoint]);
         }
         current = current[wayPoint];
 
@@ -106,11 +107,12 @@ traverse = function(object, address, defaultList)
             ( "Event: ", traverse
               ( this, 
                 "DOMEvent"+"."+event.type, 
-                [ "toReturn = new HoloHacker.a(); \
-                   toReturn.parent = current;     \
-                   var ToReturn = toReturn;       \
-                   setImmediate(function(){ToReturn.express(ToReturn.parent);});  \
-                  "
+                [ ["toReturn = new HoloHacker.a();",
+                   "toReturn.parent = current;",
+                   // "var ToReturn = toReturn;",
+                   "toReturn.express(toReturn.parent);",
+                   "",
+                  ].join("\n")
                 ]
             ));
             
@@ -126,12 +128,13 @@ traverse = function(object, address, defaultList)
             }
         //tests have to be run one after the other
         //create a new a and add its DOM node to <body>
+
         this.test1 = 
             function()
-            { a = new HoloHacker.a();
-              a.express();
+            { ROOT = new HoloHacker.a();
+              ROOT.express();
 
-              if ($("#"+a.id))
+              if ($("#"+ROOT.id))
                 console.log("passed");
               else
                 console.log("failed");
@@ -139,9 +142,9 @@ traverse = function(object, address, defaultList)
         //check if a click event causes a new a to be added to the correct location in the address space.
         this.test2 =
             function()
-            { a.div().trigger("click");
+            { ROOT.div().trigger("click");
               
-              console.log("test2: ", traverse(a, "DOMEvent.click", ["toReturn = false;"], false ));
+              console.log("test2: ", traverse(ROOT, "DOMEvent.click", ["toReturn = false;"], false ));
             }
         //Trying to make an unruly load of boxes appear on the screen in response to mousemovment
         this.test3 =
