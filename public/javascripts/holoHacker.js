@@ -150,6 +150,7 @@ traverse = function(object, address, defaultList)
 
         // Describe things as if "I" am doing it
 
+        //thekeyboard is the only line in the language that you cannot change
         
         console.log("tests have to be run one after the other");
       }
